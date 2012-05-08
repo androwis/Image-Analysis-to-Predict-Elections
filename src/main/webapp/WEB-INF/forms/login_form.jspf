@@ -1,0 +1,16 @@
+<%@ taglib prefix="scenedipity" tagdir="/WEB-INF/tags" %><%
+%><%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %><%
+
+%><div id="loginForm" style="display:none"><%
+
+%><form action="/login" method="post">
+<input placeholder="username" type="text" name="name" /><br />
+<font style="padding:0 5px; color:red; font-size:small"><%
+%>check which diseases are following you :<%
+%></font>
+<div class="clearfix">
+<button id="doLogin" class="btn large" type="submit">login</button>
+</div>
+</form><%
+
+%></div>

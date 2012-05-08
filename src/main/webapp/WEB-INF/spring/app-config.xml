@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:couchdb="http://www.ektorp.org/schema/couchdb"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.ektorp.org/schema/couchdb http://www.ektorp.org/schema/couchdb/couchdb.xsd">
+	
+	<!-- Scans within the base package of the application for @Components to configure as beans -->
+	<context:component-scan base-package="elections.control" />
+	<util:properties id="couchdbProperties" location="classpath:/couchdb.properties"/>
+	<couchdb:database id="live" name="all_sick_healthy_rack" url="http://health.scenedipity.com:5984"/>
+	<couchdb:database id="nyc" name="nyc_one_month" url="http://health.scenedipity.com:5984"/>
+	
+	<!-- Configure the multipart resolver -->
+    <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+        <!-- one of the properties available; the maximum file size in bytes -->
+        <property name="maxUploadSize" value="900000"/>
+    </bean>
+    
+    <!-- Configure the image response -->
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+	  <property name="messageConverters">
+	    <util:list>
+	      <bean id="byteArrayMessageConverter" class="org.springframework.http.converter.ByteArrayHttpMessageConverter"/>
+	    </util:list>
+	  </property>
+	</bean> 
+</beans>
