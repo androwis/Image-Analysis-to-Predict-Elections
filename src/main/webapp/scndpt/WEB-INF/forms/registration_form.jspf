@@ -1,0 +1,21 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="scenedipity" tagdir="/WEB-INF/tags" %><%
+
+// if(!isLoggedIn){
+	
+%><div id="regisrationForm">
+<form action="/register" method="post">
+I am a : <input type="radio" name="type" value="Restaurant"> Restaurant
+<input type="radio" name="type" value="Foodtruck" checked> Food Truck
+<input type="radio" name="type" value="Person"> Person
+<br/>
+username: <input type="text" name="name" /><br />
+password: <input type="text" name="password" /><br />
+password: <input type="text" name="password_confirm" /><br/>
+fullname:  <input type="text" name="fullname" /><br/>
+email : <input type="text" name="email" />
+		<div class="clearfix">
+			<button class="btn large" type="submit">register!</button>
+		</div>
+</form>
+</div>
