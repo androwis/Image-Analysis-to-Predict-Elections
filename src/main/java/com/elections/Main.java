@@ -16,7 +16,6 @@ public class Main {
 
         Server server = new Server(Integer.valueOf(webPort));
         WebAppContext root = new WebAppContext();
-
         root.setContextPath("/");
         root.setDescriptor(webappDirLocation+"/WEB-INF/web.xml");
         root.setResourceBase(webappDirLocation);
@@ -28,8 +27,8 @@ public class Main {
         //Read more here: http://wiki.eclipse.org/Jetty/Reference/Jetty_Classloading
         root.setParentLoaderPriority(true);
         
-        server.setHandler(root);
         
+        server.setHandler(root);
         server.start();
         server.join();   
     }
