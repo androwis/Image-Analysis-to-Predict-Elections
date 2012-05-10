@@ -28,8 +28,7 @@ public class ElectionController{
 				"index",
 				"Exploring Histograms of Images",
 				"the histogram",	
-		"pages/training" +
-		".jsp");
+		"pages/training.jsp");
 	}
 	@RequestMapping(method = RequestMethod.GET, value={"/histograms"})
 	public ModelAndView histograms() {
@@ -38,6 +37,14 @@ public class ElectionController{
 				"Exploring Histograms of Images",
 				"the histogram",	
 		"pages/histograms.jsp");
+	}
+	@RequestMapping(method = RequestMethod.GET, value={"/histogram-stats"})
+	public ModelAndView histogramStats() {
+		return buildPage(
+				"index",
+				"Exploring Histograms of Images",
+				"the histogram",	
+		"pages/histogram-stats.jsp");
 	}
 	@RequestMapping(method = RequestMethod.GET, value={"/histograms-hsv"})
 	public ModelAndView histogramsHSV() {

@@ -76,8 +76,8 @@ svg {
 border:solid 1px #ccc}
 .photos canvas{
   /* Just in case there are inline attributes */
-  width: 50% !important;
-  height: auto !important;
+  width: auto !important;
+  height: 50% !important;
   padding:0; margin:0;
 }
 .photos svg{

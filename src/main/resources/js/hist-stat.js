@@ -35,7 +35,7 @@ for (var i = 0; i < data.length; i += 4) {
 	var red = data[i]; // red
     var green = data[i + 1]; // green
     var blue = data[i + 2]; // blue
-    blues[blue]++; reds[red]++; greens[green]++;	
+    blues[(red+green+blue)/3]++; reds[(red-blue)/2]++; greens[(2*green-red-blue)/4]++;	
     // i+3 is alpha (the fourth element)
 }
  
@@ -59,9 +59,20 @@ var margin = {top: 30, right: 10, bottom: 10, left: 10},
     height = 300 - margin.top - margin.bottom;
 
 var x0 = Math.max(-d3.min(blues), d3.max(blues));
-var mBlue = Math.max(-d3.min(blues), d3.max(blues));
-var mRed = Math.max(-d3.min(blues), d3.max(blues));
-var mGreen = Math.max(-d3.min(blues), d3.max(blues));
+
+var mBlue = x0;
+var mRed = d3.max(reds);
+var mGreen = d3.max(greens);
+
+var sBlue = 0.0;
+var sRed = 0.0;
+var sGreen = 0.0;
+for(var i=0; i<255; i++){
+	sBlue+=blues[i];
+	sGreen+=greens[i];
+	sRed+=reds[i];
+}
+$("#green").append(sBlue/mBlue+","+sRed/mRed+","+sGreen/mGreen+"<br/>");
 
 var x = d3.scale.linear()
     .domain([0, x0])
