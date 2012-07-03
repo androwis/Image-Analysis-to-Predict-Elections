@@ -1,5 +1,8 @@
 package com.elections;
+import org.eclipse.jetty.server.Handler;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.server.handler.DefaultHandler;
+import org.eclipse.jetty.server.handler.HandlerList;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 public class Main {
@@ -22,7 +25,7 @@ public class Main {
         root.setContextPath("/");
         root.setDescriptor(electionLocation+"/WEB-INF/web.xml");
         root.setResourceBase(electionLocation);
-        String[] electionHosts = {"http://elections.scenedipity.com/", "www.scenedipity.org","scenedipity.org"};
+        String[] electionHosts = {"elections.scenedipity.com", "www.scenedipity.org","scenedipity.org"};
         root.setVirtualHosts(electionHosts);
         
         
@@ -48,8 +51,9 @@ public class Main {
         //Read more here: http://wiki.eclipse.org/Jetty/Reference/Jetty_Classloading
         scndpt.setParentLoaderPriority(true);
        
-        server.setHandler(root);
-        server.setHandler(scndpt);
+        HandlerList handlers = new HandlerList();
+        handlers.setHandlers(new Handler[] { root, scndpt});
+        server.setHandler(handlers);
         server.start();
         server.join();   
     }
