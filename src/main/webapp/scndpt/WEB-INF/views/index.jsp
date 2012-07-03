@@ -37,8 +37,8 @@ z - reserved
  
 %><%@ page import="java.util.*"%><%
 
-String url = request.getParameter("view");
-String id = request.getParameter("id");
+String url = "";
+String id = "";
 // --- begin translation---------------------------------------------------------------------------------------
 if(url.length()>0){
 
