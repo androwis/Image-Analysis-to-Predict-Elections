@@ -5,8 +5,8 @@ import org.eclipse.jetty.webapp.WebAppContext;
 public class Main {
     
     public static void main(String[] args) throws Exception{
-    	String webappDirLocation = "src/main/webapp/scndpt";
-    	String webappDirLocation2 = "src/main/webapp/elections";
+    	String scndptLocation = "src/main/webapp/scndpt";
+    	String electionLocation = "src/main/webapp/elections";
         
 //The port that we should run on can be set into an environment variable
         //Look for that variable and default to 8080 if it isn't there.
@@ -20,8 +20,10 @@ public class Main {
 
     	WebAppContext root = new WebAppContext();
         root.setContextPath("/");
-        root.setDescriptor(webappDirLocation+"/WEB-INF/web.xml");
-        root.setResourceBase(webappDirLocation);
+        root.setDescriptor(electionLocation+"/WEB-INF/web.xml");
+        root.setResourceBase(electionLocation);
+        String[] electionHosts = {"http://elections.scenedipity.com/", "www.scenedipity.org","scenedipity.org"};
+        root.setVirtualHosts(electionHosts);
         
         
         //Parent loader priority is a class loader setting that Jetty accepts.
@@ -33,8 +35,8 @@ public class Main {
         
         WebAppContext scndpt = new WebAppContext();
         scndpt.setContextPath("/");
-        scndpt.setDescriptor(webappDirLocation2+"/WEB-INF/web.xml");
-        scndpt.setResourceBase(webappDirLocation2);
+        scndpt.setDescriptor(scndptLocation+"/WEB-INF/web.xml");
+        scndpt.setResourceBase(scndptLocation);
         scndpt.setAliases(true);
         String[] hosts = {"scnd.pt", "www.scnd.pt"};
         scndpt.setVirtualHosts(hosts);
