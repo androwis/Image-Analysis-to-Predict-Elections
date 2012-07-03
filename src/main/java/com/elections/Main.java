@@ -8,15 +8,17 @@ public class Main {
     	String webappDirLocation = "src/main/webapp/scndpt";
     	String webappDirLocation2 = "src/main/webapp/elections";
         
-        //The port that we should run on can be set into an environment variable
+//The port that we should run on can be set into an environment variable
         //Look for that variable and default to 8080 if it isn't there.
         String webPort = System.getenv("PORT");
         if(webPort == null || webPort.isEmpty()) {
             webPort = "80";
         }
+        
+        
+    	Server server = new Server(Integer.valueOf(webPort));
 
-        Server server = new Server(Integer.valueOf(webPort));
-        WebAppContext root = new WebAppContext();
+    	WebAppContext root = new WebAppContext();
         root.setContextPath("/");
         root.setDescriptor(webappDirLocation+"/WEB-INF/web.xml");
         root.setResourceBase(webappDirLocation);
@@ -42,10 +44,10 @@ public class Main {
         //allow your application to replace non-server libraries that are part of the
         //container. Setting parent loader priority to true changes this behavior.
         //Read more here: http://wiki.eclipse.org/Jetty/Reference/Jetty_Classloading
-        root.setParentLoaderPriority(true);
-        
-        
+        scndpt.setParentLoaderPriority(true);
+       
         server.setHandler(root);
+        server.setHandler(scndpt);
         server.start();
         server.join();   
     }
